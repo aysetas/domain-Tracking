@@ -13,3 +13,6 @@
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{asset('Back')}}/assets/js/pages/widgets.js"></script>
 <!--end::Page Scripts-->
+<script src="{{asset('Back')}}/assets/plugins/custom/datatables/datatables.bundle.js?v=7.2.2"></script>
+<!--begin::Page Scripts(used by this page)-->
+<script src="{{asset('Back')}}/assets/js/pages/crud/datatables/basic/paginations.js?v=7.2.2"></script>
