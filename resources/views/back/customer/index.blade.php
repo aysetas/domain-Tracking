@@ -107,20 +107,20 @@
                             @endif
                             <div class="form-group">
                                 <label><strong>Ad Soyad:</strong></label>
-                                <input class="form-control form-control-solid"  name="full_name" type="text">
+                                <input class="form-control form-control-solid"  name="full_name" value="{{ old('full_name') }}" type="text">
                             </div>
 
                             <div class="form-group">
                                 <label><strong>Telefon Numarası:</strong></label>
-                                <input class="form-control form-control-solid" type="tel" name="phone"  placeholder="+90544 225 36 36" >
+                                <input class="form-control form-control-solid" type="tel" name="phone" value="{{ old('phone') }}"  placeholder="+90544 225 36 36" >
                             </div>
                             <div class="form-group">
                                 <label><strong>E-mail:</strong></label>
-                                <input class="form-control form-control-solid" type="email" name="email"  placeholder="info@gmail.com" >
+                                <input class="form-control form-control-solid" type="email" name="email" value="{{ old('email') }}" placeholder="info@gmail.com" >
                             </div>
                             <div class="form-group">
                                 <label><strong>Not:</strong></label>
-                                    <textarea class="form-control" name="note" ></textarea>
+                                    <textarea class="form-control" name="note" >{{ old('note') }}</textarea>
                             </div>
                         </div>
                         <div class="text-center mb-5">

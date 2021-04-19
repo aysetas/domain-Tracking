@@ -89,7 +89,7 @@
                             @endif
                             <div class="form-group">
                                 <label><strong>Firma Adı:</strong></label>
-                                <input class="form-control form-control-solid" name="company_name" type="text">
+                                <input class="form-control form-control-solid" name="company_name"  type="text">
                             </div>
                      
                         </div>

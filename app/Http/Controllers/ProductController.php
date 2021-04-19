@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductSaveRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,8 +14,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('back.product.index');
+    {   
+        $products=Product::all();
+        return view('back.product.index',compact('products'));
     }
 
     /**
@@ -32,9 +35,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductSaveRequest $request)
     {
-        //
+        Product::create($request->post());
+        return redirect()->route('product.index')->withMessage('Ürün Başarıyla oluşturuldu!');
+
+
     }
 
     /**
@@ -66,9 +72,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductSaveRequest $request, $id)
     {
-        //
+        $products=Product::find($id);
+        $products->update($request->post());
+        return redirect()->route('product.index')->withMessage('Ürün başarıyla güncellendi');
+
     }
 
     /**

@@ -26,7 +26,8 @@ Route::resource('/company',CompanyController::class);
 
 Route::resource('/product',ProductController::class);
 
+Route::get('/setting',[SettingController::class, 'index'])->name('back.setting');
+Route::put('/setting/{id}',[SettingController::class, 'update'])->name('back.setting.update');
+
 Route::resource('/domain',DomainController::class);
-Route::get('/setting',[SettingController::class,'index'])->name('back.setting.index');
-/*Route::get('/setting',[SettingController::class,'update'])->name('back.setting.update');*/
 Route::resource('/user',UserController::class);

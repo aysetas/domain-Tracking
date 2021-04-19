@@ -13,7 +13,7 @@ class ProductSaveRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class ProductSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'product_name' => 'required|min:3|max:100'
         ];
+    }
+    public function attributes()
+    {
+        return [
+            'product_name' => 'Ürün Adı'
+        ];
+        
     }
 }
