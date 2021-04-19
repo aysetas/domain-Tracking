@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanySaveRequest;
+use App\Models\Company;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -12,8 +15,9 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('back.company.index');
+    {   
+        $companies=Company::all();
+        return view('back.company.index',compact('companies'));
     }
 
     /**
@@ -32,9 +36,11 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanySaveRequest $request)
     {
-        //
+        Company::create($request->post());
+        return redirect()->route('company.index')->withMessage('Şirket Başarıyla Oluşturuldu!');
+
     }
 
     /**
@@ -66,9 +72,11 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CompanySaveRequest $request, $id)
     {
-        //
+        $company=Company::find($id);
+        $company->update($request->post());
+        return redirect()->route('company.index')->withMessage('Firma başarıyla güncellendi');
     }
 
     /**
@@ -79,6 +87,10 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 'çalıştı';
+
+        //$a=Customer::destroy($id);
+        //dd($a);
+        //return redirect()->route('company.index')->withError('Kayıt Başarıyla Silindi!');
     }
 }

@@ -2,26 +2,7 @@
 @section('title','Anasayfa')
 @section('content')
 <div class="row" >
-    <div class="col-md-6">
-        <div class="card card-custom">
-            <div class="card-header">
-             <div class="card-title">
-              <h3 class="card-label">
-                Domain Takvimi
-              </h3>
-             </div>
-             <div class="card-toolbar">
-              <a href="#" class="btn btn-light-primary font-weight-bold">
-              <i class="ki ki-plus "></i> EKLE
-              </a>
-             </div>
-            </div>
-            <div class="card-body">
-             <div id="kt_calendar"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card card-custom">
             <!--begin::Header-->
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
@@ -51,14 +32,13 @@
                     </tr>
                     </thead>
                     <tbody>
-               
                         <tr class="odd">
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td nowrap="nowrap">
-                                <a href="" class="btn btn-sm btn-clean btn-icon" title="Edit details">
+                                <a href="" class="btn btn-sm btn-clean btn-icon" title="Edit details" data-toggle="modal" data-target="#exampleModal-" >
                                     <i class="la la-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-sm btn-clean btn-icon delete-confirm" title="Delete">
@@ -66,189 +46,88 @@
                                 </a>
                             </td>
                         </tr>
-                    
-
-                    </tbody>
+                        <div class="modal fade" id="exampleModal-" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <form method="post" action="" enctype="multipart/form-data">
+                                    @method('PUT')
+                                    @csrf
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"> | Yemeğini düzenleyin.</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label><strong>Yemek İsmi:</strong></label>
+                                                <input type="text" name="name" class="form-control"  value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><strong>Yemek İçeriği:</strong></label>
+                                                <input type="text" name="content" class="form-control" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><strong>Yeni Yemek Görseli:</strong></label>
+                                                <input type="file"  class="form-control" name="image" accept="image/*">
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button  class="btn btn-primary font-weight-bold" name="upload" type="submit">Güncelle</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                      
+                        </tbody>
                 </table>
                 <!--end: Datatable-->
             </div>
             <!--end::Body-->
         </div>
     </div>
+    <div class="col col-lg-4">
+        <!--begin::List Widget 9-->
+        <div class="card card-custom">
+            <!--begin::Header-->
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label text-uppercase">Domain Ekle</h3>
+                </div>
+            </div>
+            <div class="card-body mt-5">
+                <div class="row justify-content-md">
+                    <div class="col-md-12 ">
+                        <form method="POST" action="" class="form" enctype="multipart/form-data">
+                            @csrf
+                         
+                            <div class="form-group">
+                                <label><strong>Yemek İsmi:</strong></label>
+                                <input type="text" name="name" class="form-control"  placeholder="Yemeğin Adı...">
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Yemek İçeriği:</strong></label>
+                                <input type="text" name="content" class="form-control"  placeholder="Yemeğin İçeriği...">
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Yemek Görseli:</strong></label>
+                                <input type="file"  class="form-control" name="image" accept="image/*">
+                            </div>
+                            <div class="text-center mb-5">
+                                <button type="submit" class="btn btn-success mr-2">Ekle</button>
+                                <button type="reset" class="btn btn-danger">İptal Et</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('footer')
-<script>
-    var KTCalendarBasic = function() {
-
-return {
-    //main function to initiate the module
-    init: function() {
-        var todayDate = moment().startOf('day');
-        var YM = todayDate.format('YYYY-MM');
-        var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
-        var TODAY = todayDate.format('YYYY-MM-DD');
-        var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
-
-        var calendarEl = document.getElementById('kt_calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-            themeSystem: 'bootstrap',
-
-            isRTL: KTUtil.isRTL(),
-
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-
-            height: 800,
-            contentHeight: 780,
-            aspectRatio: 3,  // see: https://fullcalendar.io/docs/aspectRatio
-
-            nowIndicator: true,
-            now: TODAY + 'T09:25:00', // just for demo
-
-            views: {
-                dayGridMonth: { buttonText: 'month' },
-                timeGridWeek: { buttonText: 'week' },
-                timeGridDay: { buttonText: 'day' }
-            },
-
-            defaultView: 'dayGridMonth',
-            defaultDate: TODAY,
-
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            navLinks: true,
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: YM + '-01',
-                    description: 'Toto lorem ipsum dolor sit incid idunt ut',
-                    className: "fc-event-danger fc-event-solid-warning"
-                },
-                {
-                    title: 'Reporting',
-                    start: YM + '-14T13:30:00',
-                    description: 'Lorem ipsum dolor incid idunt ut labore',
-                    end: YM + '-14',
-                    className: "fc-event-success"
-                },
-                {
-                    title: 'Company Trip',
-                    start: YM + '-02',
-                    description: 'Lorem ipsum dolor sit tempor incid',
-                    end: YM + '-03',
-                    className: "fc-event-primary"
-                },
-                {
-                    title: 'ICT Expo 2017 - Product Release',
-                    start: YM + '-03',
-                    description: 'Lorem ipsum dolor sit tempor inci',
-                    end: YM + '-05',
-                    className: "fc-event-light fc-event-solid-primary"
-                },
-                {
-                    title: 'Dinner',
-                    start: YM + '-12',
-                    description: 'Lorem ipsum dolor sit amet, conse ctetur',
-                    end: YM + '-10'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: YM + '-09T16:00:00',
-                    description: 'Lorem ipsum dolor sit ncididunt ut labore',
-                    className: "fc-event-danger"
-                },
-                {
-                    id: 1000,
-                    title: 'Repeating Event',
-                    description: 'Lorem ipsum dolor sit amet, labore',
-                    start: YM + '-16T16:00:00'
-                },
-                {
-                    title: 'Conference',
-                    start: YESTERDAY,
-                    end: TOMORROW,
-                    description: 'Lorem ipsum dolor eius mod tempor labore',
-                    className: "fc-event-primary"
-                },
-                {
-                    title: 'Meeting',
-                    start: TODAY + 'T10:30:00',
-                    end: TODAY + 'T12:30:00',
-                    description: 'Lorem ipsum dolor eiu idunt ut labore'
-                },
-                {
-                    title: 'Lunch',
-                    start: TODAY + 'T12:00:00',
-                    className: "fc-event-info",
-                    description: 'Lorem ipsum dolor sit amet, ut labore'
-                },
-                {
-                    title: 'Meeting',
-                    start: TODAY + 'T14:30:00',
-                    className: "fc-event-warning",
-                    description: 'Lorem ipsum conse ctetur adipi scing'
-                },
-                {
-                    title: 'Happy Hour',
-                    start: TODAY + 'T17:30:00',
-                    className: "fc-event-info",
-                    description: 'Lorem ipsum dolor sit amet, conse ctetur'
-                },
-                {
-                    title: 'Dinner',
-                    start: TOMORROW + 'T05:00:00',
-                    className: "fc-event-solid-danger fc-event-light",
-                    description: 'Lorem ipsum dolor sit ctetur adipi scing'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: TOMORROW + 'T07:00:00',
-                    className: "fc-event-primary",
-                    description: 'Lorem ipsum dolor sit amet, scing'
-                },
-                {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: YM + '-28',
-                    className: "fc-event-solid-info fc-event-light",
-                    description: 'Lorem ipsum dolor sit amet, labore'
-                }
-            ],
-
-            eventRender: function(info) {
-                var element = $(info.el);
-
-                if (info.event.extendedProps && info.event.extendedProps.description) {
-                    if (element.hasClass('fc-day-grid-event')) {
-                        element.data('content', info.event.extendedProps.description);
-                        element.data('placement', 'top');
-                        KTApp.initPopover(element);
-                    } else if (element.hasClass('fc-time-grid-event')) {
-                        element.find('.fc-title').append('<div class="fc-description">' + info.event.extendedProps.description + '</div>');
-                    } else if (element.find('.fc-list-item-title').lenght !== 0) {
-                        element.find('.fc-list-item-title').append('<div class="fc-description col-sm">' + info.event.extendedProps.description + '</div>');
-                    }
-                }
-            }
-        });
-
-        calendar.render();
-    }
-};
-}();
-
-jQuery(document).ready(function() {
-KTCalendarBasic.init();
-});
-</script>
-
-//dataTable
 <script>
     $(document).ready( function () {
         $('#myTable').DataTable({

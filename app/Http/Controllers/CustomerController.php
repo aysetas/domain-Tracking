@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerSaveRequest;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -13,7 +15,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('back.customer.index');
+        
+        $customers = Customer::all();
+        return view('back.customer.index',compact('customers'));
+        
     }
 
     /**
@@ -32,9 +37,11 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerSaveRequest $request)
     {
-        //
+        Customer::create($request->post());
+
+        return redirect()->route('customer.index')->withMessage('Müşteri Başarıyla Oluşturuldu!');
     }
 
     /**
@@ -66,9 +73,12 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerSaveRequest $request, $id)
     {
-        //
+        $customer=Customer::find($id);
+        $customer->update($request->post());
+
+        return redirect()->route('customer.index')->withMessage('Müşteri başarıyla güncellendi');
     }
 
     /**
@@ -79,6 +89,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Customer::find($id)->delete();
+        return redirect()->route('customer.index')->withError('Müşteri Kaydı başarıyla silindi!');
     }
 }

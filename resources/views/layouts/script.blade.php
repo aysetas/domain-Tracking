@@ -16,3 +16,39 @@
 <script src="{{asset('Back')}}/assets/plugins/custom/datatables/datatables.bundle.js?v=7.2.2"></script>
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{asset('Back')}}/assets/js/pages/crud/datatables/basic/paginations.js?v=7.2.2"></script>
+<script>
+    @if(Session::has('message'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+        toastr.success("{{ session('message') }}");
+    @endif
+
+    @if(Session::has('error'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+        toastr.error("{{ session('error') }}");
+    @endif
+
+    @if(Session::has('info'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+        toastr.info("{{ session('info') }}");
+    @endif
+    @if(Session::has('warning'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+       toastr.warning("{{ session('warning') }}");
+    @endif
+</script>
