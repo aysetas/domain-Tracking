@@ -7,6 +7,11 @@ use Illuminate\Foundation\Http\FormRequest;
 class SettingUpdateRequest extends FormRequest
 {
     /**
+     * @var mixed
+     */
+
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -23,15 +28,11 @@ class SettingUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $logo="";
-        if (request()->hasFile('site_logo')){
-            $logo="mimes:jpeg,jpg,png";
-        }
+
         return [
-           "site_logo" => $logo,
             "site_title" => 'required',
-            "site_desc" => 'required',
-            "site_email" => 'required|email'
+            "site_email" => 'required|email',
+            "site_desc" => 'nullable'
         ];
 
     }

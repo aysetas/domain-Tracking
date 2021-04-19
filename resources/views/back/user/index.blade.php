@@ -9,22 +9,21 @@
                 <h3 class="card-title align-items-start flex-column">
                     <span class="card-label font-weight-bolder text-dark">Kullanıcı Listesi</span>
                 </h3>
-            
+
             </div>
             <div class="card-body">
-         
+
                 <table class="table table-separate table-head-custom table-checkable dataTable no-footer" id="myTable" aria-describedby="kt_datatable_info" role="grid" style="width: 1231px;">
                     <thead>
                     <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Record ID: activate to sort column descending" style="width: 56px;"># ID</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Record ID: activate to sort column descending" ># ID</th>
                         <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending" >Ad Soyad</th>
-                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Ship City: activate to sort column ascending" >Telefon</th>
                         <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Ship Address: activate to sort column ascending" >E-mail</th>
-                        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 105px;">İŞLEMLER</th>
+                        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" >İŞLEMLER</th>
                     </tr>
                     </thead>
                     <tbody>
-               
+
                         <tr class="odd">
                             <td></td>
                             <td></td>
@@ -39,7 +38,7 @@
                                 </a>
                             </td>
                         </tr>
-                    
+
 
                     </tbody>
                 </table>
@@ -58,7 +57,7 @@
                 <div class="row justify-content-md-center">
                     <div class="col-md-10">
                         <div class="card-body">
-                            {{--  
+                            {{--
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -73,11 +72,7 @@
                                 <label><strong>Ad Soyad:</strong></label>
                                 <input class="form-control form-control-solid" id="full_name" type="text">
                             </div>
-                     
-                            <div class="form-group">
-                                <label><strong>Telefon Numarası:</strong></label>
-                                <input class="form-control form-control-solid" type="tel" id="phone"  placeholder="+90544 225 36 36" >
-                            </div>
+
                             <div class="form-group">
                                 <label><strong>E-mail:</strong></label>
                                 <input class="form-control form-control-solid" type="email" id="email"  placeholder="info@gmail.com" >

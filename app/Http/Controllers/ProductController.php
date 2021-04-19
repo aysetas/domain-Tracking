@@ -14,7 +14,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $products=Product::all();
         return view('back.product.index',compact('products'));
     }
@@ -88,6 +88,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect()->route('product.index')->withError('Kayıt Başarıyla Silindi!');
     }
 }

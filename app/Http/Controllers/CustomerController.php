@@ -15,10 +15,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        
+
         $customers = Customer::all();
         return view('back.customer.index',compact('customers'));
-        
+
     }
 
     /**
@@ -89,7 +89,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        Customer::find($id)->delete();
+        Customer::destroy($id);
         return redirect()->route('customer.index')->withError('Müşteri Kaydı başarıyla silindi!');
     }
 }

@@ -15,7 +15,6 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('site_logo')->nullable();
             $table->string('site_title')->nullable();
             $table->text('site_desc')->nullable();
             $table->string('site_email')->nullable();

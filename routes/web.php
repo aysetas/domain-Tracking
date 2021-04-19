@@ -24,10 +24,11 @@ Route::resource('/customer',CustomerController::class);
 Route::get('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
 Route::resource('/company',CompanyController::class);
 
+Route::get('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::resource('/product',ProductController::class);
 
-Route::get('/setting',[SettingController::class, 'index'])->name('back.setting');
-Route::put('/setting/{id}',[SettingController::class, 'update'])->name('back.setting.update');
+Route::get('/setting',[SettingController::class, 'index'])->name('back.setting.index');
+Route::patch('/setting/{id}',[SettingController::class, 'update'])->name('back.setting.update');
 
 Route::resource('/domain',DomainController::class);
 Route::resource('/user',UserController::class);

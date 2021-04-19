@@ -9,10 +9,10 @@
                 <h3 class="card-title align-items-start flex-column">
                     <span class="card-label font-weight-bolder text-dark">Firma Listesi</span>
                 </h3>
-            
+
             </div>
             <div class="card-body">
-         
+
                 <table class="table table-separate table-head-custom table-checkable dataTable no-footer" id="myTable" aria-describedby="kt_datatable_info" role="grid" style="width: 1231px;">
                     <thead>
                     <tr role="row">
@@ -30,7 +30,7 @@
                                     <a href="" class="btn btn-sm btn-clean btn-icon" title="Edit details" data-toggle="modal" data-target="#exampleModal-{{$company->id}}">
                                         <i class="la la-edit"></i>
                                     </a>
-                                    <a href="{{route('company.destroy',$company->id)}}" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                                    <a href="{{route('company.destroy',$company->id)}}" class="btn btn-sm btn-clean btn-icon delete-confirm" title="Delete">
                                         <i class="la la-trash"></i>
                                     </a>
                                 </td>
@@ -59,7 +59,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div> 
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -91,7 +91,7 @@
                                 <label><strong>Firma Adı:</strong></label>
                                 <input class="form-control form-control-solid" name="company_name"  type="text">
                             </div>
-                     
+
                         </div>
                         <div class="text-center mb-5">
                             <button type="submit" class="btn btn-success mr-2">Ekle</button>

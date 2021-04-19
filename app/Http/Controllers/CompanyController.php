@@ -15,7 +15,7 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $companies=Company::all();
         return view('back.company.index',compact('companies'));
     }
@@ -87,10 +87,7 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        return 'çalıştı';
-
-        //$a=Customer::destroy($id);
-        //dd($a);
-        //return redirect()->route('company.index')->withError('Kayıt Başarıyla Silindi!');
+       Company::destroy($id);
+       return redirect()->route('company.index')->withError('Kayıt Başarıyla Silindi!');
     }
 }

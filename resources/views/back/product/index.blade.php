@@ -9,10 +9,10 @@
                 <h3 class="card-title align-items-start flex-column">
                     <span class="card-label font-weight-bolder text-dark">Ürün Listesi</span>
                 </h3>
-            
+
             </div>
             <div class="card-body">
-         
+
                 <table class="table table-separate table-head-custom table-checkable dataTable no-footer" id="myTable" aria-describedby="kt_datatable_info" role="grid" style="width: 1231px;">
                     <thead>
                     <tr role="row">
@@ -30,7 +30,7 @@
                                     <a href="" class="btn btn-sm btn-clean btn-icon" title="Edit details" data-toggle="modal" data-target="#exampleModal-{{$product->id}}">
                                         <i class="la la-edit"></i>
                                     </a>
-                                    <a href="{{route('product.destroy',$product->id)}}" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                                    <a href="{{route('product.destroy',$product->id)}}" class="btn btn-sm btn-clean btn-icon delete-confirm" title="Delete">
                                         <i class="la la-trash"></i>
                                     </a>
                                 </td>
@@ -59,7 +59,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div> 
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -90,7 +90,7 @@
                                 <label><strong>Ürün Adı:</strong></label>
                                 <input class="form-control form-control-solid" name="product_name" type="text">
                             </div>
-                     
+
                         </div>
                         <div class="card-footer d-flex justify-content-lg-end">
                             <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
@@ -131,5 +131,37 @@
 
         });
     } );
+</script>
+<script>
+    $('.delete-confirm').click(function (e) {
+        e.preventDefault();
+        const url = $(this).attr('href');
+        Swal.fire({
+            title: 'Silmek için emin misin?',
+            text: "Bu öğeyi silmek istediğine emin misin?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil!',
+            cancelButtonText: 'Hayır, Silme!',
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                Swal.fire(
+                    'Silindi!',
+                    'İlgili içerik başarıyla silindi!',
+                    'success'
+                )
+                window.location.href = url;
+                //result.dismiss can be 'cancel', 'overlay',
+                //'close', and 'timer'
+            } else if (result.dismiss === 'cancel') {
+                Swal.fire(
+                    'İptal edildi!',
+                    'Silme işlemi iptal edildi!',
+                    'warning'
+                )
+            }
+        });
+    });
 </script>
 @endsection

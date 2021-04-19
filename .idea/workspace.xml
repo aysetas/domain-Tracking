@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fda2561b-1a0b-4d5b-8296-9a756cb047b9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/DomainTracking.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DomainTracking.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SettingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Customer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Customer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/SettingUpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/SettingUpdateRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Setting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back/customer/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/customer/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back/homepage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/homepage.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_07_102415_create_settings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_07_102415_create_settings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back/company/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/company/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back/product/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/product/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back/setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/setting.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +53,6 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
       <path value="$PROJECT_DIR$/vendor/sebastian/version" />
       <path value="$PROJECT_DIR$/vendor/sebastian/type" />
-      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
@@ -129,6 +139,14 @@
       <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
       <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/league/glide" />
+      <path value="$PROJECT_DIR$/vendor/spatie/image-optimizer" />
+      <path value="$PROJECT_DIR$/vendor/spatie/image" />
+      <path value="$PROJECT_DIR$/vendor/spatie/temporary-directory" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-medialibrary" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
     </include_path>
   </component>
   <component name="ProjectId" id="1qrE9O9YmAxqUAWwM62IMu3O2HT" />
@@ -141,7 +159,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tourkey" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -169,6 +187,7 @@
       <workItem from="1617960305895" duration="1913000" />
       <workItem from="1618061891788" duration="846000" />
       <workItem from="1618490387737" duration="56000" />
+      <workItem from="1618842247716" duration="16564000" />
     </task>
     <servers />
   </component>
