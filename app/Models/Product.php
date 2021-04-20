@@ -10,5 +10,8 @@ class Product extends Model
     use HasFactory;
     protected $table='products';
     protected $fillable=['product_name'];
-    
+
+    public function domains(){
+        return $this->hasMany(Domain::class);
+    }
 }

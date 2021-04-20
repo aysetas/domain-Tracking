@@ -13,7 +13,7 @@ class DomainSaveRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class DomainSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'price' => 'required|numeric',
+            'started_at' => 'required|date',
+            'finished_at' => 'required|date'
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            'price' => 'Fiyat',
+            'started_at' => 'Başlangıç Tarihi',
+            'finished_at' => 'Bitiş Tarihi'
+
         ];
     }
 }

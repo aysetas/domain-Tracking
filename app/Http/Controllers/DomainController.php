@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DomainSaveRequest;
+use App\Models\Company;
+use App\Models\Customer;
+use App\Models\Domain;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class DomainController extends Controller
@@ -13,7 +18,11 @@ class DomainController extends Controller
      */
     public function index()
     {
-        return view('back.homepage');
+        $products=Product::all();
+        $customers=Customer::all();
+        $companies=Company::all();
+        $domains=Domain::all();
+        return view('back.homepage',compact('domains','products','customers','companies'));
     }
 
     /**
@@ -32,9 +41,10 @@ class DomainController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DomainSaveRequest $request)
     {
-        //
+        Domain::create($request->post());
+        return redirect()->route('domain.index')->withMessage('Domain Başarıyla Oluşturuldu!');
     }
 
     /**

@@ -10,4 +10,8 @@ class Customer extends Model
     use HasFactory;
     protected $table='customers';
     protected $fillable=['full_name','email','phone','note'];
+
+    public function domains(){
+        return $this->hasMany(Domain::class);
+    }
 }

@@ -9,34 +9,32 @@
                 <h3 class="card-title align-items-start flex-column">
                     <span class="card-label font-weight-bolder text-dark">Domain Listesi</span>
                 </h3>
-                <div class="card-toolbar">
-                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="left" >
-                        <!--begin::Trigger Modal-->
-                        <a href="" class="btn btn-light-primary font-weight-bold"><i class="ki ki-plus "></i>EKLE</a>
-                        <!--end::Trigger Modal-->
-                        <!--begin::Modal Content-->
-                       
-                    </div>
-                </div>
             </div>
             <div class="card-body">
-         
+
                 <table class="table table-separate table-head-custom table-checkable dataTable no-footer" id="myTable" aria-describedby="kt_datatable_info" role="grid" style="width: 1231px;">
                     <thead>
                     <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Record ID: activate to sort column descending" style="width: 56px;"># ID</th>
-                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending" >Başlık</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending" >Ürün</th>
                         <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Ship City: activate to sort column ascending" >Müşteri</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Ship City: activate to sort column ascending" >Firma</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Ship City: activate to sort column ascending" >Fiyat</th>
                         <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" aria-label="Ship Address: activate to sort column ascending" >Tarih</th>
                         <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 105px;">İŞLEMLER</th>
                     </tr>
                     </thead>
                     <tbody>
+                         @foreach($domains as $domain)
                         <tr class="odd">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$domain->id}}</td>
+
+                            <td>{{$domain->product->product_name}}</td>
+                            <td>{{$domain->customer->full_name}}</td>
+                            <td>{{$domain->company->company_name}}</td>
+                            <td>{{$domain->price}}₺</td>
+                            <td><span class="label label-danger label-pill label-inline mr-2">{{$domain->DaysLeft}}</span></td>
+
                             <td nowrap="nowrap">
                                 <a href="" class="btn btn-sm btn-clean btn-icon" title="Edit details" data-toggle="modal" data-target="#exampleModal-" >
                                     <i class="la la-edit"></i>
@@ -53,7 +51,7 @@
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"> | Yemeğini düzenleyin.</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"> {{$domain->id}}| Domain düzenleyin.</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                             </button>
@@ -71,7 +69,7 @@
                                                 <label><strong>Yeni Yemek Görseli:</strong></label>
                                                 <input type="file"  class="form-control" name="image" accept="image/*">
                                             </div>
-                                        
+
                                         </div>
                                         <div class="modal-footer">
                                             <button  class="btn btn-primary font-weight-bold" name="upload" type="submit">Güncelle</button>
@@ -80,7 +78,7 @@
                                 </form>
                             </div>
                         </div>
-                      
+                         @endforeach
                         </tbody>
                 </table>
                 <!--end: Datatable-->
@@ -100,20 +98,66 @@
             <div class="card-body mt-5">
                 <div class="row justify-content-md">
                     <div class="col-md-12 ">
-                        <form method="POST" action="" class="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('domain.store')}}" class="form" enctype="multipart/form-data">
                             @csrf
-                         
-                            <div class="form-group">
-                                <label><strong>Yemek İsmi:</strong></label>
-                                <input type="text" name="name" class="form-control"  placeholder="Yemeğin Adı...">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li><b>{{ $error }}</b></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <div class="form-group ">
+                                <label><strong>Ürün Adı:</strong></label>
+                                <select class="form-control form-control-solid" name="product_id">
+                                    @foreach($products as $product)
+                                        <option value="{{ $product->id }}" @if(old('product_id')===$product->id) selected @endif>{{$product->product_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label><strong>Müşteri Adı:</strong></label>
+                                <select class="form-control form-control-solid" name="customer_id">
+                                    @foreach($customers as $customer)
+                                        <option value="{{ $customer->id }}" @if(old('$customer_id')===$customer->id) selected @endif>{{$customer->full_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label><strong>Firma Adı:</strong></label>
+                                <select class="form-control form-control-solid" name="company_id">
+                                    @foreach($companies as $company)
+                                        <option value="{{ $company->id }}" @if(old('company_id')===$company->id) selected @endif>{{$company->company_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label><strong>Yemek İçeriği:</strong></label>
-                                <input type="text" name="content" class="form-control"  placeholder="Yemeğin İçeriği...">
+                                <label><strong>Fiyatı:</strong></label>
+                                <input type="text" name="price" class="form-control form-control-solid" >
                             </div>
                             <div class="form-group">
-                                <label><strong>Yemek Görseli:</strong></label>
-                                <input type="file"  class="form-control" name="image" accept="image/*">
+                                <label><strong>Başlangıç Tarihi:</strong></label>
+                                <div class="input-group input-group-solid date" id="kt_datetimepicker_2" data-target-input="nearest">
+                                    <input type="text" class="form-control form-control-solid datetimepicker-input" placeholder="Başlangıç Tarihi seçin." data-target="#kt_datetimepicker_2" name="started_at" value="{{old('started_at')}}"/>
+                                    <div class="input-group-append" data-target="#kt_datetimepicker_2" data-toggle="datetimepicker">
+                                    <span class="input-group-text">
+                                     <i class="ki ki-calendar"></i>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label ><strong>Bitiş Tarihi:</strong></label>
+                                <div class="input-group input-group-solid date" id="kt_datetimepicker_3" data-target-input="nearest">
+                                    <input type="text" class="form-control form-control-solid datetimepicker-input" placeholder="Bitiş Tarihi seçin." data-target="#kt_datetimepicker_3" name="finished_at" value="{{old('finished_at')}}"/>
+                                    <div class="input-group-append" data-target="#kt_datetimepicker_3" data-toggle="datetimepicker">
+                                    <span class="input-group-text">
+                                     <i class="ki ki-calendar"></i>
+                                    </span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="text-center mb-5">
                                 <button type="submit" class="btn btn-success mr-2">Ekle</button>
@@ -129,9 +173,19 @@
 @endsection
 @section('footer')
 <script>
+    $('#kt_datetimepicker_2').datetimepicker({
+        format: 'L'
+    });
+    $('#kt_datetimepicker_3').datetimepicker({
+        format: 'L'
+    });
+</script>
+<script>
     $(document).ready( function () {
         $('#myTable').DataTable({
             columns: [
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -158,4 +212,4 @@
     } );
 </script>
 @endsection
-    
+

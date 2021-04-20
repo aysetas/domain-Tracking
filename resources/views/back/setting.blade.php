@@ -40,7 +40,7 @@
                                 </div>
                                 <label><strong>Resimler:</strong></label>
                                 @if (!$setting->site_logo)
-                                    <span class="form-text text-muted">Bu Rehber ile ilgili resim bulunamadı. Yeni bir resim ekleyin!</span>
+                                    <span class="form-text text-muted">İlgili resim bulunamadı. Yeni bir resim ekleyin!</span>
                                 @endif
                                 <div class="col-lg-3">
                                     <div class="image-input image-input-empty image-input-outline" id="kt_image_5" style="background-image: url({{$setting->site_logo->getUrl()}})">

@@ -11,4 +11,7 @@ class Company extends Model
     protected $table='companies';
     protected $fillable=['company_name'];
 
+    public function domains(){
+        return $this->hasMany(Domain::class);
+    }
 }
