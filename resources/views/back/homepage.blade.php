@@ -36,38 +36,62 @@
                             <td><span class="label label-danger label-pill label-inline mr-2">{{$domain->DaysLeft}}</span></td>
 
                             <td nowrap="nowrap">
-                                <a href="" class="btn btn-sm btn-clean btn-icon" title="Edit details" data-toggle="modal" data-target="#exampleModal-" >
+                                <a href="" class="btn btn-sm btn-clean btn-icon" title="Edit details" data-toggle="modal" data-target="#exampleModal-{{$domain->id}}" >
                                     <i class="la la-edit"></i>
                                 </a>
-                                <a href="" class="btn btn-sm btn-clean btn-icon delete-confirm" title="Delete">
+                                <a href="{{route('domain.destroy',$domain->id)}}" class="btn btn-sm btn-clean btn-icon delete-confirm" title="Delete">
                                     <i class="la la-trash"></i>
                                 </a>
                             </td>
                         </tr>
-                        <div class="modal fade" id="exampleModal-" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal-{{$domain->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <form method="post" action="" enctype="multipart/form-data">
+                                <form method="post" action="{{route('domain.update',$domain->id)}}" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"> {{$domain->id}}| Domain düzenleyin.</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"> Domain Düzenleyin.</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="form-group">
-                                                <label><strong>Yemek İsmi:</strong></label>
-                                                <input type="text" name="name" class="form-control"  value="">
+                                            <div class="form-group ">
+                                                <label><strong>Ürün Adı:</strong></label>
+                                                <select class="form-control form-control-solid" name="product_id">
+                                                    @foreach($products as $product)
+                                                        <option value="{{ $product->id }}" @if($domain->product_id===$product->id) selected @endif>{{$product->product_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label><strong>Müşteri Adı:</strong></label>
+                                                <select class="form-control form-control-solid" name="customer_id">
+                                                    @foreach($customers as $customer)
+                                                        <option value="{{ $customer->id }}" @if($domain->customer_id===$customer->id) selected @endif>{{$customer->full_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label><strong>Firma Adı:</strong></label>
+                                                <select class="form-control form-control-solid" name="company_id">
+                                                    @foreach($companies as $company)
+                                                        <option value="{{ $company->id }}" @if($domain->company_id===$company->id) selected @endif>{{$company->company_name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label><strong>Yemek İçeriği:</strong></label>
-                                                <input type="text" name="content" class="form-control" value="">
+                                                <label><strong>Fiyatı:</strong></label>
+                                                <input type="text" name="price" class="form-control form-control-solid" value="{{$domain->price}}" >
                                             </div>
                                             <div class="form-group">
-                                                <label><strong>Yeni Yemek Görseli:</strong></label>
-                                                <input type="file"  class="form-control" name="image" accept="image/*">
+                                                <label><strong>Başlangıç Tarihi:</strong></label>
+                                                <input type="date" class="form-control form-control-solid"  name="started_at" value="{{$domain->started_at->format('Y-m-d')}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label ><strong>Bitiş Tarihi:</strong></label>
+                                                <input type="date" class="form-control form-control-solid"  name="finished_at" value="{{$domain->finished_at->format('Y-m-d')}}">
                                             </div>
 
                                         </div>
@@ -113,7 +137,7 @@
                                 <label><strong>Ürün Adı:</strong></label>
                                 <select class="form-control form-control-solid" name="product_id">
                                     @foreach($products as $product)
-                                        <option value="{{ $product->id }}" @if(old('product_id')===$product->id) selected @endif>{{$product->product_name}}</option>
+                                        <option value="{{ $product->id }}" @if($domain->product_id===$product->id) selected @endif>{{$product->product_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -121,7 +145,7 @@
                                 <label><strong>Müşteri Adı:</strong></label>
                                 <select class="form-control form-control-solid" name="customer_id">
                                     @foreach($customers as $customer)
-                                        <option value="{{ $customer->id }}" @if(old('$customer_id')===$customer->id) selected @endif>{{$customer->full_name}}</option>
+                                        <option value="{{ $customer->id }}" @if($domain->customer_id===$customer->id) selected @endif>{{$customer->full_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -129,35 +153,21 @@
                                 <label><strong>Firma Adı:</strong></label>
                                 <select class="form-control form-control-solid" name="company_id">
                                     @foreach($companies as $company)
-                                        <option value="{{ $company->id }}" @if(old('company_id')===$company->id) selected @endif>{{$company->company_name}}</option>
+                                        <option value="{{ $company->id }}" @if($domain->company_id===$company->id) selected @endif>{{$company->company_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label><strong>Fiyatı:</strong></label>
-                                <input type="text" name="price" class="form-control form-control-solid" >
+                                <input type="text" name="price" class="form-control form-control-solid" value="{{ old('price') }}">
                             </div>
                             <div class="form-group">
                                 <label><strong>Başlangıç Tarihi:</strong></label>
-                                <div class="input-group input-group-solid date" id="kt_datetimepicker_2" data-target-input="nearest">
-                                    <input type="text" class="form-control form-control-solid datetimepicker-input" placeholder="Başlangıç Tarihi seçin." data-target="#kt_datetimepicker_2" name="started_at" value="{{old('started_at')}}"/>
-                                    <div class="input-group-append" data-target="#kt_datetimepicker_2" data-toggle="datetimepicker">
-                                    <span class="input-group-text">
-                                     <i class="ki ki-calendar"></i>
-                                    </span>
-                                    </div>
-                                </div>
+                                <input type="date" class="form-control form-control-solid"  name="started_at" value="{{old('started_at')}}">
                             </div>
                             <div class="form-group">
                                 <label ><strong>Bitiş Tarihi:</strong></label>
-                                <div class="input-group input-group-solid date" id="kt_datetimepicker_3" data-target-input="nearest">
-                                    <input type="text" class="form-control form-control-solid datetimepicker-input" placeholder="Bitiş Tarihi seçin." data-target="#kt_datetimepicker_3" name="finished_at" value="{{old('finished_at')}}"/>
-                                    <div class="input-group-append" data-target="#kt_datetimepicker_3" data-toggle="datetimepicker">
-                                    <span class="input-group-text">
-                                     <i class="ki ki-calendar"></i>
-                                    </span>
-                                    </div>
-                                </div>
+                                <input type="date" class="form-control form-control-solid"  name="finished_at" value="{{old('finished_at')}}">
                             </div>
                             <div class="text-center mb-5">
                                 <button type="submit" class="btn btn-success mr-2">Ekle</button>
@@ -172,14 +182,7 @@
 </div>
 @endsection
 @section('footer')
-<script>
-    $('#kt_datetimepicker_2').datetimepicker({
-        format: 'L'
-    });
-    $('#kt_datetimepicker_3').datetimepicker({
-        format: 'L'
-    });
-</script>
+
 <script>
     $(document).ready( function () {
         $('#myTable').DataTable({

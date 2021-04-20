@@ -78,7 +78,7 @@ class CustomerController extends Controller
         $customer=Customer::find($id);
         $customer->update($request->post());
 
-        return redirect()->route('customer.index')->withMessage('Müşteri başarıyla güncellendi');
+        return redirect()->route('customer.index')->withMessage('Müşteri Başarıyla Güncellendi!');
     }
 
     /**

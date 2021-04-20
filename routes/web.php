@@ -40,7 +40,7 @@ Route::group(['middleware' => 'isUser'], function () {
         Route::get('/', [SettingController::class, 'index'])->name('index');
         Route::patch('/{id}', [SettingController::class, 'update'])->name('update');
     });
-
+    Route::get('/domain/{id}', [DomainController::class, 'destroy'])->name('domain.destroy');
     Route::resource('/domain', DomainController::class);
 });
 Route::resource('/user',UserController::class);

@@ -76,9 +76,11 @@ class DomainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DomainSaveRequest $request, $id)
     {
-        //
+        $domain=Domain::find($id);
+        $domain->update($request->post());
+        return redirect()->route('domain.index')->withMessage('Domain Başarıyla Güncellendi!');
     }
 
     /**
@@ -89,6 +91,7 @@ class DomainController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Domain::destroy($id);
+        return redirect()->route('domain.index')->withError('Domain Başarıyla Silindi!');
     }
 }
