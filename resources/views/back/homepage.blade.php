@@ -214,5 +214,38 @@
         });
     } );
 </script>
+<script>
+    $('.delete-confirm').click(function (e) {
+        e.preventDefault();
+        const url = $(this).attr('href');
+        Swal.fire({
+            title: 'Silmek için emin misin?',
+            text: "Bu öğeyi silmek istediğinize emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil!',
+            cancelButtonText: 'Hayır, Silme!',
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                Swal.fire(
+                    'Silindi!',
+                    'İlgili içerik başarıyla silindi!',
+                    'success'
+                )
+                window.location.href = url;
+                // result.dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+            }
+            else if (result.dismiss === 'cancel') {
+                Swal.fire(
+                    'İptal edildi!',
+                    'Silme işlemi iptal edildi!',
+                    'warning'
+                )
+            }
+        });
+    });
+</script>
 @endsection
 

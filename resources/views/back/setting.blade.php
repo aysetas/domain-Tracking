@@ -39,10 +39,8 @@
                                     <input type="file" id="exampleInputFile" name="site_logo" class="form-control" accept="image/*">
                                 </div>
                                 <label><strong>Resimler:</strong></label>
-                                @if (!$setting->site_logo)
-                                    <span class="form-text text-muted">İlgili resim bulunamadı. Yeni bir resim ekleyin!</span>
-                                @endif
                                 <div class="col-lg-3">
+                                    @if ($setting->site_logo!=null)
                                     <div class="image-input image-input-empty image-input-outline" id="kt_image_5" style="background-image: url({{$setting->site_logo->getUrl()}})">
                                         <div class="image-input-wrapper"></div>
 
@@ -52,7 +50,9 @@
                                         <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
                                         </span>
                                     </div>
-
+                                        @else
+                                            <img width="150" height="150" src="{{ asset('storage/resimyok.png') }}" alt="{{ $setting->site_title }}">
+                                         @endif
                                 </div>
                         </div>
                         <div class="card-footer d-flex justify-content-lg-end">

@@ -2,8 +2,12 @@
     <!--begin::Brand-->
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
-        <a href="index.html" class="brand-logo">
+        <a href="{{route('domain.index')}}" class="brand-logo">
+            @if (\App\Models\Setting::first()->site_logo!=null)
             <img alt="Logo" class="w-130px" src="{{\App\Models\Setting::first()->site_logo->getUrl()}}"/>
+            @else
+                <img width="150" height="150" src="{{ asset('storage/resimyok.png') }}" alt="{{ $setting->site_title }}">
+            @endif
         </a>
         <!--end::Logo-->
     </div>
@@ -36,12 +40,6 @@
                     <a href="{{ route('product.index') }}" class="menu-link">
                         <i class="menu-icon flaticon2-delivery-package"></i>
                         <span class="menu-text">Ürünler</span>
-                    </a>
-                </li>
-                <li class="menu-item {{ Route::is('user.*') ? 'menu-item-open' : '' }}" aria-haspopup="true">
-                    <a href="{{ route('user.index') }}" class="menu-link">
-                        <i class="menu-icon flaticon2-user-1"></i>
-                        <span class="menu-text">Kullanıcılar</span>
                     </a>
                 </li>
                 <li class="menu-item {{ Route::is('back.setting.index') ? 'menu-item-open' : '' }}" aria-haspopup="true">
