@@ -18,17 +18,29 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/customer/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
-Route::resource('/customer',CustomerController::class);
+Route::prefix('login')->name('login.')->middleware('isLogin')->group(function (){
+    Route::get('/', [UserController::class, 'login'])->name('index');
+    Route::post('/post', [UserController::class, 'loginPost'])->name('index.post');
+});
 
-Route::get('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
-Route::resource('/company',CompanyController::class);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
-Route::resource('/product',ProductController::class);
+Route::group(['middleware' => 'isUser'], function () {
 
-Route::get('/setting',[SettingController::class, 'index'])->name('back.setting.index');
-Route::patch('/setting/{id}',[SettingController::class, 'update'])->name('back.setting.update');
+    Route::get('/customer/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::resource('/customer', CustomerController::class);
 
-Route::resource('/domain',DomainController::class);
+    Route::get('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+    Route::resource('/company', CompanyController::class);
+
+    Route::get('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::resource('/product', ProductController::class);
+
+    Route::prefix('setting')->name('back.setting.')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::patch('/{id}', [SettingController::class, 'update'])->name('update');
+    });
+
+    Route::resource('/domain', DomainController::class);
+});
 Route::resource('/user',UserController::class);

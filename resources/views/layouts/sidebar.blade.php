@@ -3,7 +3,7 @@
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
         <a href="index.html" class="brand-logo">
-            <img alt="Logo" class="w-130px" src="{{ asset('Back') }}/logo3.png"/>
+            <img alt="Logo" class="w-130px" src="{{\App\Models\Setting::first()->site_logo->getUrl()}}"/>
         </a>
         <!--end::Logo-->
     </div>
@@ -50,7 +50,7 @@
                         <span class="menu-text">Ayarlar</span>
                     </a>
                 </li>
-              
+
             </ul>
             <!--end::Menu Nav-->
         </div>

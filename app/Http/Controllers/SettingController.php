@@ -16,7 +16,8 @@ class SettingController extends Controller
 
         $setting=Setting::first();
 
-        return view('back.setting',compact('setting'));
+        return view('back.setting', compact('setting'));
+
     }
 
     public function update(SettingUpdateRequest $request, Setting $id){
@@ -32,6 +33,5 @@ class SettingController extends Controller
             ->route('back.setting.index')->withMessage('Ayarlar başarıyla güncellendi!');
 
     }
-
 
 }
